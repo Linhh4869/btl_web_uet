@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html><head>
+<html>
+
+<head>
     <script src="js/constant.js"></script>
-</head><body>
+</head>
+
+<body>
     <div class="form">
         <label for='username'>Tên đăng nhập</label>
-        <input id="username" type="text"/>
+        <input id="username" type="text" />
         <label for='password'>Mật khẩu</label>
-        <input id="password" type='password'/>
+        <input id="password" type='password' />
         <p><span id='error'></span></p>
         <button id='login'>Đăng nhập</button>
     </div>
@@ -22,12 +26,10 @@
                 headers: headers(),
                 body: JSON.stringify(user)
             }).then(res => {
-                if (res.status == 200)
-                {
-                    document.cookie = 'token = Bearer '+ res.token;
+                if (res.status == 200) {
+                    document.cookie = 'token = Bearer ' + res.token;
                     window.location.replace('/index.html');
-                } else
-                {
+                } else {
                     document.querySelector('#error').innerText = 'Tên đăng nhập hoặc mật khẩu không chính xác';
                 }
             }).catch(res => {
@@ -35,4 +37,6 @@
             });
         }
     </script>
-</body></html>
+</body>
+
+</html>
