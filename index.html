@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html><head>
+    <script src="js/constant.js"></script>
+</head><body>
+    <div class="form">
+        <label for='username'>Tên đăng nhập</label>
+        <input id="username" type="text"/>
+        <label for='password'>Mật khẩu</label>
+        <input id="password" type='password'/>
+        <p><span id='error'></span></p>
+        <button id='login'>Đăng nhập</button>
+    </div>
+    <script>
+        document.querySelector('#login').onclick = function() {
+            let user = {
+                "username": document.querySelector('#username').value,
+                "password": document.querySelector('#password').value
+            };
+
+            fetch(getUrl('/api/login'), {
+                method: 'POST',
+                headers: headers(),
+                body: JSON.stringify(user)
+            }).then(res => {
+                if (res.status == 200)
+                {
+                    document.cookie = 'token= Bearer '+ res.token;
+                } else
+                {
+                    document.querySelector('#error').innerText = 'Tên đăng nhập hoặc mật khẩu không chính xác';
+                }
+            }).catch(res => {
+                document.querySelector('#error').innerText = 'Xảy ra lỗi khi đăng nhập';
+            });
+        }
+    </script>
+</body></html>
