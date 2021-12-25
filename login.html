@@ -24,7 +24,8 @@
             }).then(res => {
                 if (res.status == 200)
                 {
-                    document.cookie = 'token= Bearer '+ res.token;
+                    document.cookie = 'token = Bearer '+ res.token;
+                    window.location.replace('/index.html');
                 } else
                 {
                     document.querySelector('#error').innerText = 'Tên đăng nhập hoặc mật khẩu không chính xác';
